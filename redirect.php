@@ -26,11 +26,17 @@ $DOM = new DOMDocument;
 $DOM->loadHTML( $output);
 
 //get all H1
-$items = $DOM->getElementsByTagName('img');
+$itemstitle = $DOM->getElementsByTagName('title');
+$itemsimg = $DOM->getElementsByTagName('img');
+
+ for ($i = 0; $i < $itemstitle->length; $i++)
+        echo $itemstitle->item($i)->nodeValue . "<br/>";
+
 
 //display all H1 text
- for ($i = 0; $i < $items->length; $i++)
-        echo $items->item($i)->nodeValue . "<br/>";
+ for ($i = 0; $i < $itemsimg->length; $i++)
+        echo $itemsimg->item($i)->nodeValue . "<br/>";
+
 
 // CREATING dom object from url and extract titel and imags in loop and save into vars
 
