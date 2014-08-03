@@ -15,10 +15,22 @@ b. for every image inside ImageList => it will output an image tage with the ima
 */
 
 // Getting Parameters from rewrite or directly
-$processing_url = base64_decode($_GET[url]);
+$url = base64_decode($_GET[url]);
+$curl = curl_init($url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+$output = curl_exec($curl);
+curl_close($curl)
 
 
+$DOM = new DOMDocument;
+$DOM->loadHTML( $output);
 
+//get all H1
+$items = $DOM->getElementsByTagName('img');
+
+//display all H1 text
+ for ($i = 0; $i < $items->length; $i++)
+        echo $items->item($i)->nodeValue . "<br/>";
 
 // CREATING dom object from url and extract titel and imags in loop and save into vars
 
